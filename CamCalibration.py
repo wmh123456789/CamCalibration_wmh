@@ -11,8 +11,8 @@ criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 ImgPath = '/home/wmh/work/seqbuff/usb-cam/'
 
 # number of rows and  columns in the chess board
-row = 6
-col = 7
+row = 7
+col = 6
 
 # prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
 objp = np.zeros((col * row, 3), np.float32)
@@ -48,9 +48,9 @@ for fname in images:
         imgpoints.append(corners)
         # Draw and display the corners, then save the result images.
         # cv2.drawChessboardCorners(img, (row, col), corners, ret)
-        # cv2.imshow('img', img)
         # print ImgPath + 'cross_' + fname.split('/')[-1]
         # cv2.imwrite(ImgPath+'cross_'+fname.split('/')[-1],img)
+        # cv2.imshow('img', img)
         # cv2.waitKey(500)
         # cv2.destroyAllWindows()
     #If not found, remove the bad image.
