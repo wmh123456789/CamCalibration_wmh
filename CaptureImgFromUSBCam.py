@@ -5,7 +5,7 @@ import numpy as np
 import time
 
 
-ImgPath = '/home/wmh/work/seqbuff/usb-cam'
+ImgPath = '/home/wmh/work/seqbuff/usb-cam/'
 ni = 0
 CamON = False
 
@@ -21,8 +21,8 @@ while True:
         CamON = not CamON
         print "Camera:", CamON
     if CamON:
-        cv2.imwrite(ImgPath+'/'+"%s.jpg" % ni,frame)
-        print 'Save image:', ImgPath+'/'+"%s.jpg" % ni
+        cv2.imwrite(ImgPath+"%s.jpg" % ni,frame)
+        print 'Save image:', ImgPath+"%s.jpg" % ni
         ni += 1
 
 cap.release()
