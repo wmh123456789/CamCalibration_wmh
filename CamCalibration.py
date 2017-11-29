@@ -1,20 +1,28 @@
 import numpy as np
 import cv2
 import glob
+import os
 
 print("Start camera processing...")
 # termination criteria
 criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 
+# ImgPath = '/home/wmh/work/seqbuff/'
+ImgPath = '/home/wmh/work/seqbuff/usb-cam/5/'
+
+# number of rows and  columns in the chess board
+row = 6
+col = 7
+
 # prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
-objp = np.zeros((6 * 7, 3), np.float32)
-objp[:, :2] = np.mgrid[0:7, 0:6].T.reshape(-1, 2)
+objp = np.zeros((col * row, 3), np.float32)
+objp[:, :2] = np.mgrid[0:row, 0:col].T.reshape(-1, 2)
 
 # Arrays to store object points and image points from all the images.
 objpoints = []  # 3d point in real world space
 imgpoints = []  # 2d points in image plane.
 
-ImgPath = '/home/wmh/work/seqbuff/'
+
 # images = glob.glob('*.png')
 images = glob.glob(ImgPath + '*.jpg')
 images = images + glob.glob(ImgPath + '*.png')
@@ -28,22 +36,29 @@ for fname in images:
     # gray = img
 
     # Find the chess board corners
-    ret, corners = cv2.findChessboardCorners(gray, (7, 6), None)
+    ret, corners = cv2.findChessboardCorners(gray, (row, col), None)
     # cv2.imwrite('g'+fname,gray)
-    print fname,": ",ret
+    # print fname,": ",ret
 
     # If found, add object points, image points (after refining them)
     if ret == True:
+        print fname, "is available."
         objpoints.append(objp)
         cv2.cornerSubPix(gray, corners, (11, 11), (-1, -1), criteria)
         imgpoints.append(corners)
-        # Draw and display the corners
-        cv2.drawChessboardCorners(img, (7, 6), corners, ret)
-        cv2.imshow('img', img)
-        cv2.waitKey(500)
-        cv2.destroyAllWindows()
+        # Draw and display the corners, then save the result images.
+        # cv2.drawChessboardCorners(img, (row, col), corners, ret)
+        # cv2.imshow('img', img)
+        # print ImgPath + 'cross_' + fname.split('/')[-1]
+        # cv2.imwrite(ImgPath+'cross_'+fname.split('/')[-1],img)
+        # cv2.waitKey(500)
+        # cv2.destroyAllWindows()
+    #If not found, remove the bad image.
+    else:
+        os.remove(fname)
 
-print "Find: ", len(objpoints)
+print "\nImage path:", ImgPath
+print "In",len(images),"images, find", len(objpoints), "available."
 ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1],None,None)
 print "Cam Matrix: ", mtx
 print "fx =",mtx[0,0]
