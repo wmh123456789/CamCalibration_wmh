@@ -7,7 +7,7 @@ print("Start camera processing...")
 # termination criteria
 criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 
-# ImgPath = '/home/wmh/work/seqbuff/'
+ImgPath = '/home/wmh/work/seqbuff/'
 ImgPath = '/home/wmh/work/seqbuff/usb-cam/'
 
 # number of rows and  columns in the chess board
