@@ -3,8 +3,9 @@ from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 
 # TRACE_FILE = '/home/wmh/work/seqbuff/AroundDesk2/KeyFrameTrajectory.txt'
-TRACE_FILE = '/home/wmh/work/seqbuff/OnDesk2/KeyFrameTrajectory.txt'
-# TRACE_FILE = '/home/wmh/work/seqbuff/KeyFrameTrajectory.txt'
+# TRACE_FILE = '/home/wmh/work/seqbuff/OnDesk2/KeyFrameTrajectory.txt'
+TRACE_FILE = '/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/KeyFrameTrajectory.txt'
+
 x,y,z = [],[],[]
 fp = open(TRACE_FILE)
 for line in fp.readlines():
