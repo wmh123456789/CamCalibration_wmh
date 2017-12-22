@@ -49,6 +49,7 @@ def is_inlier(coeffs, xyz, threshold = 0.002):
 # Solve the distance between 2 3D points
 def dist_PointToPoint(xyz1,xyz2):
 	return np.linalg.norm(xyz1 - xyz2)
+	# return np.sqrt(np.dot(xyz1-xyz2,xyz1-xyz2))
 
 # Solve the distance of a 3D point to a plane
 def dist_PointToPlane(xyz,abcd):
@@ -123,9 +124,9 @@ def main():
 
 
 	# RANSAC
-	Inlier_margin = 0.001
+	Inlier_margin = 0.01
 	m, b = run_ransac(xyzs, estimate, 3, goal_inliers, max_iterations,Inlier_margin)
-	print "Model check(shuold be 1):",np.linalg.norm(m[:3])
+	# print "Model check(shuold be 1):",np.linalg.norm(m[:3])
 	a, b, c, d = m
 	xx, yy, zz = plot_plane(a, b, c, d)
 	ax.plot_surface(xx, yy, zz, color=(0, 1, 0, 0.5))
