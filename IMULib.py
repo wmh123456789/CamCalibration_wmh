@@ -14,7 +14,7 @@ def loadcsv(CSVFILE):
 
 # Rawdata is a numpy array, raw ACC output
 def GravityFilter(Rawdata, g0 = np.array([0.0,0.0,0.0])):
-    alpha = 0.8  # refer to Android SDK
+    alpha = 0.8  # In Android SDK, alpha = 0.8
     # g = np.array([0.0,0.0,0.0])
 
     g = alpha*g0 + (1-alpha)*Rawdata
@@ -29,13 +29,17 @@ def main():
     ColEnd = 12
     gravity = np.array([0.0,0.0,0.0])
     AccSum = np.array([0.0,0.0,0.0])
+    GNormArray =[]
 
 
     for data in dataset:
         gravity,acc = GravityFilter(np.array(data[ColStart:ColEnd+1]),gravity)
         AccSum += acc
+        GNormArray.append(np.linalg.norm(gravity))
         print "g:",gravity,":",np.linalg.norm(gravity),"; Acc:",acc
 
+    GNormArray = np.array(GNormArray)
+    print np.std(GNormArray)
     print "Sum of Acc:", AccSum
     pass
 
