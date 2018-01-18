@@ -30,17 +30,14 @@ def run_ransac(data, estimate, sample_size, goal_inliers, max_iterations,Inlier_
 	print 'took iterations:', i+1, 'best model:', best_model, 'explains:', best_ic, " in ", len(data)
 	return best_model, best_ic
 
-
 def augment(xyzs):
 	axyz = np.ones((len(xyzs), 4))
 	axyz[:, :3] = xyzs
 	return axyz
 
-
 def estimate(xyzs):
 	axyz = augment(xyzs[:3])
 	return np.linalg.svd(axyz)[-1][-1, :]
-
 
 def is_inlier(coeffs, xyz, threshold = 0.002):
 
@@ -109,11 +106,11 @@ def main():
 	# Load data
 	# TRACE_FILE = '/home/wmh/work/seqbuff/AroundDesk2/KeyFrameTrajectory.txt'
 	# TRACE_FILE = '/home/wmh/work/seqbuff/OnDesk2/KeyFrameTrajectory.txt'
-	TRACE_FILE = '/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/KeyFrameTrajectory.txt'
-	# TRACE_FILE = '/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/MapInfo/MPInfo_333.csv'
+	# TRACE_FILE = '/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/KeyFrameTrajectory.txt'
+	TRACE_FILE = '/home/wmh/work/ORB_SLAM2_wmh-ubuntu/Examples/Monocular/MapInfo/MPInfo_2125.csv'
 
-	# xyzs = loadcsv(TRACE_FILE)
-	xyzs = loadtxt(TRACE_FILE)
+	xyzs = loadcsv(TRACE_FILE)
+	# xyzs = loadtxt(TRACE_FILE)
 
 	# xyzs = xyzs * 100
 

@@ -8,7 +8,7 @@ print("Start camera processing...")
 criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 
 ImgPath = '/home/wmh/work/seqbuff/'
-ImgPath = '/home/wmh/work/seqbuff/usb-cam/'
+ImgPath = '/home/wmh/work/seqbuff/output/1/'
 
 # number of rows and  columns in the chess board
 row = 7
@@ -53,7 +53,7 @@ for fname in images:
         # cv2.imshow('img', img)
         # cv2.waitKey(500)
         # cv2.destroyAllWindows()
-    #If not found, remove the bad image.
+    #If not found, remove the bad image
     else:
         os.remove(fname)
 
